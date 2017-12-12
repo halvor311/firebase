@@ -61,6 +61,14 @@ var config = {
       console.log(firstTrainConverted);
       var currentTime = moment();
       console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+      var diffTime = moment().diff(moment(firstTrainConverted), "minutes");
+      console.log("DIFFERENCE IN TIME: " + diffTime);
+      var tRemainder = diffTime % tFrequency;
+      console.log(tRemainder);
+      var tMinutesTillTrain = tFrequency - tRemainder;
+      console.log("Minutes till train: " + tMinutesTillTrain);
+      var trainNext = moment().add(tMinutesTillTrain, "minutes");
+      console.log("Arrival Time: " + moment(trainNext).format("hh:mm"));
       var trainStartPretty = moment.unix(trainFirst).format("MM/DD/YY")
      $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination +"</td><td>" + trainFirst + "</td><td>" + trainFrequency + "</td><td>" + nextTrain + "</td></tr>");
   });
