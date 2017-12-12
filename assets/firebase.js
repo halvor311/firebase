@@ -71,5 +71,5 @@ var config = {
       var trainNext = moment().add(tMinutesTillTrain, "minutes");
       console.log("Arrival Time: " + moment(trainNext).format("hh:mm"));
       var trainStartPretty = moment.unix(trainFirst).format("MM/DD/YY")
-     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination +"</td><td>" + trainFirst + "</td><td>" + trainFrequency + "</td><td>" + trainNext + "</td></tr>");
+     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination +"</td><td>" + trainFrequency + "</td><td>" + trainNext.format("hh:mm") + "</td><td>" + tMinutesTillTrain + "</td></tr>");
   });
