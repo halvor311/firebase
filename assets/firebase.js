@@ -26,11 +26,11 @@ var config = {
       var nextTrain = $("#minutesAway").val().trim();
 
       var newTrain = {
-          train: trainName,
+          train: train,
           destination: destination,
           firstTrain: firstTrain,
           frequency: frequency,
-          nextTrain: minutesAway
+          nextTrain: nextTrain
         
       };
       database.ref().push(newTrain);
@@ -55,14 +55,15 @@ var config = {
       console.log(trainFrequency);
       console.log(nextTrain);
 
-      var tFrequency = 17;
-      var firstTrain = "3:30";
-      var firstTrainConverted = moment(firstTrain, "hh:mm").subtract(1, "years");
+      var tFrequency = trainFrequency;
+    //   var firstTrain = "03:30";
+      var firstTrainConverted = moment(trainFirst, "hh:mm").subtract(1, "years");
       console.log(firstTrainConverted);
       var currentTime = moment();
       console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
       var diffTime = moment().diff(moment(firstTrainConverted), "minutes");
       console.log("DIFFERENCE IN TIME: " + diffTime);
+      //This is a modulus that finds the remainder of the equation that's put in
       var tRemainder = diffTime % tFrequency;
       console.log(tRemainder);
       var tMinutesTillTrain = tFrequency - tRemainder;
@@ -70,5 +71,5 @@ var config = {
       var trainNext = moment().add(tMinutesTillTrain, "minutes");
       console.log("Arrival Time: " + moment(trainNext).format("hh:mm"));
       var trainStartPretty = moment.unix(trainFirst).format("MM/DD/YY")
-     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination +"</td><td>" + trainFirst + "</td><td>" + trainFrequency + "</td><td>" + nextTrain + "</td></tr>");
+     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination +"</td><td>" + trainFirst + "</td><td>" + trainFrequency + "</td><td>" + trainNext + "</td></tr>");
   });
