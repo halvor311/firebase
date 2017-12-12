@@ -23,18 +23,22 @@ var config = {
       var destination = $("#destination").val().trim();
       var firstTrain = $("#firstTrainTime").val().trim();
       var frequency = $("#frequency").val().trim();
+      var nextTrain = $("#minutesAway").val().trim();
 
       var newTrain = {
           train: trainName,
           destination: destination,
           firstTrain: firstTrain,
-          frequency: frequency
+          frequency: frequency,
+          nextTrain: minutesAway
+        
       };
       database.ref().push(newTrain);
       console.log(newTrain.train);
       console.log(newTrain.destination);
       console.log(newTrain.firstTrain);
       console.log(newTrain.frequency);
+      console.log(newTrain.nextTrain)
 
   });
   database.ref().on("child_added", function(childSnapshot, prevChildKey) {
@@ -43,11 +47,13 @@ var config = {
       var trainDestination = childSnapshot.val().destination;
       var trainFirst = childSnapshot.val().firstTrain;
       var trainFrequency = childSnapshot.val().frequency;
+      var nextTrain = childSnapshot.val().nextTrain;
 
       console.log(trainName);
       console.log(trainDestination);
       console.log(trainFirst);
       console.log(trainFrequency);
+      console.log(nextTrain);
 
       var tFrequency = 17;
       var firstTrain = "3:30";
@@ -56,5 +62,5 @@ var config = {
       var currentTime = moment();
       console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
       var trainStartPretty = moment.unix(trainFirst).format("MM/DD/YY")
-     
+     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination +"</td><td>" + trainFirst + "</td><td>" + trainFrequency + "</td><td>" + nextTrain + "</td></tr>");
   });
